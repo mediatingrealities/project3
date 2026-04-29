@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html>
+  <script>
+  // This script waits for the camera to load and slows down the rotation speed
+  AFRAME.registerComponent('slow-load', {
+    init: function () {
+      this.el.setAttribute('look-controls', {
+        magicWindowTrackingEnabled: false,
+        mouseEnabled: true
+      });
+    }
+  });
+</script>
   <head>
     <meta charset="utf-8">
     <title>3D Virtual Museum</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-sky src="pano.jpg" rotation="0 -90 0"></a-sky>
-      
-      <a-text value="Welcome to the Museum" color="#FFF" 
-              position="-1 2 -3" scale="2 2 2"></a-text>
-    </a-scene>
+<a-scene>
+  <a-assets>
+    <img id="museum-pano" src="pano.jpg">
+  </a-assets>
+
+  <a-sky src="#museum-pano" radius="5000" rotation="0 -90 0"></a-sky>
+
+  <a-entity id="rig" position="0 0 0">
+    <a-camera look-controls="pointerLockEnabled: true; magicWindowTrackingEnabled: false; touchEnabled: true">
+  <a-cursor></a-cursor> 
+</a-camera>
+  </a-entity>
+</a-scene>
   </body>
 </html>
